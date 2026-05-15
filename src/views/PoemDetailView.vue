@@ -44,13 +44,40 @@
             <h2 class="section-title">注释赏析</h2>
             <p class="section-content">{{ poem.annotations }}</p>
           </section>
+
+          <nav class="article-nav">
+            <router-link 
+              v-if="prevPoem" 
+              :to="`/poems/${prevPoem.id}.html`" 
+              class="nav-item prev"
+            >
+              <span class="nav-icon">←</span>
+              <div class="nav-info">
+                <span class="nav-label">上一篇</span>
+                <span class="nav-title">{{ prevPoem.title }}</span>
+              </div>
+            </router-link>
+            <div v-else class="nav-item empty"></div>
+            
+            <router-link 
+              v-if="nextPoem" 
+              :to="`/poems/${nextPoem.id}.html`" 
+              class="nav-item next"
+            >
+              <div class="nav-info">
+                <span class="nav-label">下一篇</span>
+                <span class="nav-title">{{ nextPoem.title }}</span>
+              </div>
+              <span class="nav-icon">→</span>
+            </router-link>
+          </nav>
         </article>
       </div>
     </div>
     
     <div class="not-found" v-else>
       <p>作品不存在</p>
-      <router-link to="/library" class="back-link">返回书库</router-link>
+      <router-link to="/library.html" class="back-link">返回书库</router-link>
     </div>
   </div>
 </template>
@@ -66,9 +93,19 @@ const poemsStore = usePoemsStore()
 
 const poem = computed(() => poemsStore.getPoemById(route.params.id))
 
+const prevPoem = computed(() => {
+  if (!route.params.id) return null
+  return poemsStore.getPrevPoem(route.params.id)
+})
+
+const nextPoem = computed(() => {
+  if (!route.params.id) return null
+  return poemsStore.getNextPoem(route.params.id)
+})
+
 const breadcrumbItems = computed(() => {
   const category = route.query.category || poem.value?.category || '诗词'
-  const categoryPath = route.query.category ? '/library' : '/poems'
+  const categoryPath = route.query.category ? '/library.html' : '/poems.html'
   return [
     { name: category, path: categoryPath },
     { name: poem.value?.title || '详情' }
@@ -209,6 +246,80 @@ const breadcrumbItems = computed(() => {
   font-size: 16px;
   line-height: 1.9;
   color: var(--color-primary);
+}
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xxl) 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--spacing-xxl);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 45%;
+}
+
+.nav-item.empty {
+  background: transparent;
+}
+
+.nav-item.prev {
+  justify-content: flex-start;
+}
+
+.nav-item.next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.nav-item:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 169, 110, 0.3);
+}
+
+.nav-item:hover .nav-label,
+.nav-item:hover .nav-title,
+.nav-item:hover .nav-icon {
+  color: white;
+}
+
+.nav-icon {
+  font-size: 24px;
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+}
+
+.nav-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.nav-label {
+  font-size: 12px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
 }
 
 .not-found {

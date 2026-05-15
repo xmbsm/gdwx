@@ -10,61 +10,61 @@ const router = createRouter({
       meta: { title: '新文艺' }
     },
     {
-      path: '/classics/:id',
+      path: '/classics/:id.html',
       name: 'classic-detail',
       component: () => import('../views/ClassicDetailView.vue'),
       meta: { title: '作品详情', showBreadcrumb: true }
     },
     {
-      path: '/poems',
+      path: '/poems.html',
       name: 'poems',
       component: () => import('../views/PoemsView.vue'),
       meta: { title: '诗词' }
     },
     {
-      path: '/poems/:id',
+      path: '/poems/:id.html',
       name: 'poem-detail',
       component: () => import('../views/PoemDetailView.vue'),
       meta: { title: '诗词详情', showBreadcrumb: true }
     },
     {
-      path: '/works/:id',
+      path: '/works/:id.html',
       name: 'work-detail',
       component: () => import('../views/WorkDetailView.vue'),
       meta: { title: '作品详情', showBreadcrumb: true }
     },
     {
-      path: '/about',
+      path: '/about.html',
       name: 'about',
       component: () => import('../views/AboutView.vue'),
       meta: { title: '关于站点' }
     },
     {
-      path: '/library',
+      path: '/library.html',
       name: 'library',
       component: () => import('../views/LibraryView.vue'),
       meta: { title: '书库' }
     },
     {
-      path: '/authors',
+      path: '/authors.html',
       name: 'authors',
       component: () => import('../views/AuthorsView.vue'),
       meta: { title: '作者' }
     },
     {
-      path: '/authors/:name',
+      path: '/authors/:name.html',
       name: 'author-detail',
       component: () => import('../views/AuthorDetailView.vue'),
       meta: { title: '作者详情', showBreadcrumb: true }
     },
     {
-      path: '/yiyan',
+      path: '/yiyan.html',
       name: 'yiyan',
       component: () => import('../views/YiyanView.vue'),
       meta: { title: '一言' }
     },
     {
-      path: '/search',
+      path: '/search.html',
       name: 'search',
       component: () => import('../views/SearchView.vue'),
       meta: { title: '搜索结果' }

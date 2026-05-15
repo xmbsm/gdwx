@@ -51,7 +51,7 @@
           <router-link 
             v-for="author in paginatedAuthors" 
             :key="author.name"
-            :to="`/authors/${encodeURIComponent(author.name)}`"
+            :to="`/authors/${encodeURIComponent(author.name)}.html`"
             class="author-card"
           >
             <div class="author-avatar">{{ author.name.charAt(0) }}</div>

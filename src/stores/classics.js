@@ -115,6 +115,22 @@ export const useClassicsStore = defineStore('classics', {
     getDynasties: (state) => {
       const dynasties = [...new Set(state.classicsList.map(c => c.dynasty).filter(Boolean))]
       return dynasties
+    },
+    
+    getPrevClassic: (state) => (id) => {
+      const index = state.classicsList.findIndex(c => c.id === id)
+      if (index > 0) {
+        return state.classicsList[index - 1]
+      }
+      return null
+    },
+    
+    getNextClassic: (state) => (id) => {
+      const index = state.classicsList.findIndex(c => c.id === id)
+      if (index >= 0 && index < state.classicsList.length - 1) {
+        return state.classicsList[index + 1]
+      }
+      return null
     }
   },
   

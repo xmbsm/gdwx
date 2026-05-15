@@ -74,13 +74,40 @@
               </div>
             </div>
           </section>
+
+          <nav class="article-nav">
+            <router-link 
+              v-if="prevClassic" 
+              :to="`/classics/${prevClassic.id}.html`" 
+              class="nav-item prev"
+            >
+              <span class="nav-icon">←</span>
+              <div class="nav-info">
+                <span class="nav-label">上一篇</span>
+                <span class="nav-title">{{ prevClassic.title }}</span>
+              </div>
+            </router-link>
+            <div v-else class="nav-item empty"></div>
+            
+            <router-link 
+              v-if="nextClassic" 
+              :to="`/classics/${nextClassic.id}.html`" 
+              class="nav-item next"
+            >
+              <div class="nav-info">
+                <span class="nav-label">下一篇</span>
+                <span class="nav-title">{{ nextClassic.title }}</span>
+              </div>
+              <span class="nav-icon">→</span>
+            </router-link>
+          </nav>
         </article>
       </div>
     </div>
     
     <div class="not-found" v-else>
       <p>作品不存在</p>
-      <router-link to="/library" class="back-link">返回书库</router-link>
+      <router-link to="/library.html" class="back-link">返回书库</router-link>
     </div>
   </div>
 </template>
@@ -96,10 +123,20 @@ const classicsStore = useClassicsStore()
 
 const classic = computed(() => classicsStore.getClassicById(route.params.id))
 
+const prevClassic = computed(() => {
+  if (!route.params.id) return null
+  return classicsStore.getPrevClassic(route.params.id)
+})
+
+const nextClassic = computed(() => {
+  if (!route.params.id) return null
+  return classicsStore.getNextClassic(route.params.id)
+})
+
 const breadcrumbItems = computed(() => {
   const category = route.query.category || classic.value?.category || '作品'
   return [
-    { name: category, path: '/library' },
+    { name: category, path: '/library.html' },
     { name: classic.value?.title || '详情' }
   ]
 })
@@ -291,6 +328,80 @@ const breadcrumbItems = computed(() => {
   padding: var(--spacing-lg);
   color: var(--color-secondary);
   font-size: 14px;
+}
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xxl) 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--spacing-xxl);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 45%;
+}
+
+.nav-item.empty {
+  background: transparent;
+}
+
+.nav-item.prev {
+  justify-content: flex-start;
+}
+
+.nav-item.next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.nav-item:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 169, 110, 0.3);
+}
+
+.nav-item:hover .nav-label,
+.nav-item:hover .nav-title,
+.nav-item:hover .nav-icon {
+  color: white;
+}
+
+.nav-icon {
+  font-size: 24px;
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+}
+
+.nav-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.nav-label {
+  font-size: 12px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
 }
 
 .not-found {

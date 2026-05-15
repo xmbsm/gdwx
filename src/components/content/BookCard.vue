@@ -29,8 +29,8 @@ const props = defineProps({
 
 const linkTo = computed(() => {
   return props.type === 'classics' 
-    ? `/classics/${props.book.id}`
-    : `/works/${props.book.id}`
+    ? `/classics/${props.book.id}.html`
+    : `/works/${props.book.id}.html`
 })
 </script>
 

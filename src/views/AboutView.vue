@@ -96,7 +96,7 @@
             <div class="contact-list">
               <div class="contact-item">
                 <span class="contact-icon">📧</span>
-                <span>contact@example.com</span>
+                <span>1@xinwenyi.com</span>
               </div>
             </div>
           </section>

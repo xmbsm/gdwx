@@ -114,6 +114,20 @@ export const usePoemsStore = defineStore('poems', {
     },
     getAllCategories: (state) => {
       return [...new Set(state.poemsList.map(p => p.category).filter(Boolean))]
+    },
+    getPrevPoem: (state) => (id) => {
+      const index = state.poemsList.findIndex(p => p.id === id)
+      if (index > 0) {
+        return state.poemsList[index - 1]
+      }
+      return null
+    },
+    getNextPoem: (state) => (id) => {
+      const index = state.poemsList.findIndex(p => p.id === id)
+      if (index >= 0 && index < state.poemsList.length - 1) {
+        return state.poemsList[index + 1]
+      }
+      return null
     }
   },
   

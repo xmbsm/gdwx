@@ -132,6 +132,20 @@ export const useWorksStore = defineStore('works', {
     },
     getAllSubcategories: (state) => {
       return [...new Set(state.worksList.map(w => w.subcategory).filter(Boolean))]
+    },
+    getPrevWork: (state) => (id) => {
+      const index = state.worksList.findIndex(w => w.id === id)
+      if (index > 0) {
+        return state.worksList[index - 1]
+      }
+      return null
+    },
+    getNextWork: (state) => (id) => {
+      const index = state.worksList.findIndex(w => w.id === id)
+      if (index >= 0 && index < state.worksList.length - 1) {
+        return state.worksList[index + 1]
+      }
+      return null
     }
   },
   

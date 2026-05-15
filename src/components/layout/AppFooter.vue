@@ -13,9 +13,9 @@
         <div class="footer-section">
           <h3 class="footer-title">内容分类</h3>
           <ul class="footer-links">
-            <li><router-link to="/library">书库</router-link></li>
-            <li><router-link to="/poems">诗词</router-link></li>
-            <li><router-link to="/authors">作者</router-link></li>
+            <li><router-link to="/library.html">书库</router-link></li>
+            <li><router-link to="/poems.html">诗词</router-link></li>
+            <li><router-link to="/authors.html">作者</router-link></li>
           </ul>
         </div>
         
@@ -23,7 +23,7 @@
           <h3 class="footer-title">相关链接</h3>
           <ul class="footer-links">
             <li><a href="https://github.com/xmbsm/gdwx" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><router-link to="/about">关于我们</router-link></li>
+            <li><router-link to="/about.html">关于我们</router-link></li>
           </ul>
         </div>
       </div>
@@ -50,7 +50,7 @@
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
 }

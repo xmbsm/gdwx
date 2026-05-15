@@ -46,7 +46,7 @@
 
     <div class="not-found" v-else>
       <p>作者不存在</p>
-      <router-link to="/authors" class="back-link">返回作者列表</router-link>
+      <router-link to="/authors.html" class="back-link">返回作者列表</router-link>
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ const author = computed(() => {
         category: item.category,
         coverImage: item.coverImage,
         summary: item.summary,
-        link: `/classics/${item.id}`
+        link: `/classics/${item.id}.html`
       })
     }
   })
@@ -104,7 +104,7 @@ const author = computed(() => {
         category: item.category,
         coverImage: item.coverImage,
         summary: item.famousLines || '',
-        link: `/poems/${item.id}`
+        link: `/poems/${item.id}.html`
       })
     }
   })
@@ -124,7 +124,7 @@ const author = computed(() => {
         category: item.category,
         coverImage: item.coverImage,
         summary: item.summary || '',
-        link: `/works/${item.id}`
+        link: `/works/${item.id}.html`
       })
     }
   })
@@ -138,7 +138,7 @@ const author = computed(() => {
 })
 
 const breadcrumbItems = computed(() => [
-  { name: '作者', path: '/authors' },
+  { name: '作者', path: '/authors.html' },
   { name: author.value?.name || '详情' }
 ])
 </script>

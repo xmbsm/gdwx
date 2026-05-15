@@ -37,7 +37,7 @@
         </div>
         <p class="search-stats">
           共收录 <span class="stat-number">{{ totalBooks }}</span> 部书籍，
-          <router-link to="/library" class="view-library" @click.stop>查看书库 →</router-link>
+          <router-link to="/library.html" class="view-library" @click.stop>查看书库 →</router-link>
         </p>
       </div>
       
@@ -307,19 +307,19 @@ function goToDetail() {
   if (!popupData.value.id) return
   closePopup()
   if (popupData.value.routeType === 'classics') {
-    router.push(`/classics/${popupData.value.id}`)
+    router.push(`/classics/${popupData.value.id}.html`)
   } else if (popupData.value.routeType === 'poems') {
-    router.push(`/poems/${popupData.value.id}`)
+    router.push(`/poems/${popupData.value.id}.html`)
   } else {
-    router.push(`/works/${popupData.value.id}`)
+    router.push(`/works/${popupData.value.id}.html`)
   }
 }
 
 function goToSearch() {
   if (heroSearchQuery.value.trim()) {
-    router.push(`/search?q=${encodeURIComponent(heroSearchQuery.value)}`)
+    router.push(`/search.html?q=${encodeURIComponent(heroSearchQuery.value)}`)
   } else {
-    router.push('/search')
+    router.push('/search.html')
   }
 }
 
@@ -503,12 +503,13 @@ canvas {
   position: relative;
   z-index: 10;
   text-align: center;
-  padding: var(--spacing-lg);
+  padding: 30px var(--spacing-lg);
   width: 100%;
   max-width: 1600px;
 }
 
 .hero-header {
+  margin-top: -100px;
   margin-bottom: var(--spacing-xxl);
 }
 
@@ -516,7 +517,7 @@ canvas {
   font-family: var(--font-display);
   font-size: 56px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: #85662e;
   letter-spacing: 12px;
   text-shadow: 0 2px 20px rgba(201, 169, 110, 0.3);
 }
@@ -525,7 +526,7 @@ canvas {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  margin-top: -15px;
+  margin-top: -20px;
 }
 
 .search-wrapper {

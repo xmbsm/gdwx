@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/poems/${poem.id}`" class="poem-card">
+  <router-link :to="`/poems/${poem.id}.html`" class="poem-card">
     <div class="card-content">
       <h3 class="card-title">{{ poem.title }}</h3>
       <div class="card-meta">

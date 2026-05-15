@@ -1,6 +1,6 @@
 <template>
   <div class="poems-view">
-    <Breadcrumb :items="[{ name: '诗词', path: '/poems' }]" />
+    <Breadcrumb :items="[{ name: '诗词', path: '/poems.html' }]" />
     
     <div class="page-content">
       <div class="container">

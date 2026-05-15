@@ -7,11 +7,11 @@
       
       <nav class="nav-menu" :class="{ 'is-active': isMobileMenuOpen }">
         <router-link to="/" class="nav-link" @click="closeMobileMenu">首页</router-link>
-        <router-link to="/poems" class="nav-link" @click="closeMobileMenu">诗词</router-link>
-        <router-link to="/library" class="nav-link" @click="closeMobileMenu">书库</router-link>
-        <router-link to="/authors" class="nav-link" @click="closeMobileMenu">作者</router-link>
-        <router-link to="/yiyan" class="nav-link" @click="closeMobileMenu">一言</router-link>
-        <router-link to="/about" class="nav-link" @click="closeMobileMenu">关于</router-link>
+        <router-link to="/poems.html" class="nav-link" @click="closeMobileMenu">诗词</router-link>
+        <router-link to="/library.html" class="nav-link" @click="closeMobileMenu">书库</router-link>
+        <router-link to="/authors.html" class="nav-link" @click="closeMobileMenu">作者</router-link>
+        <router-link to="/yiyan.html" class="nav-link" @click="closeMobileMenu">一言</router-link>
+        <router-link to="/about.html" class="nav-link" @click="closeMobileMenu">关于</router-link>
       </nav>
       
       <div class="header-actions">
@@ -49,7 +49,7 @@ function closeMobileMenu() {
 }
 
 function goToSearch() {
-  router.push('/search')
+  router.push('/search.html')
 }
 </script>
 
@@ -67,7 +67,7 @@ function goToSearch() {
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
   height: 100%;

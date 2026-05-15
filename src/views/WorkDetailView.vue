@@ -47,13 +47,40 @@
             <h2 class="section-title">文学价值</h2>
             <p class="section-content">{{ work.literaryValue }}</p>
           </section>
+
+          <nav class="article-nav">
+            <router-link 
+              v-if="prevWork" 
+              :to="`/works/${prevWork.id}.html`" 
+              class="nav-item prev"
+            >
+              <span class="nav-icon">←</span>
+              <div class="nav-info">
+                <span class="nav-label">上一篇</span>
+                <span class="nav-title">{{ prevWork.title }}</span>
+              </div>
+            </router-link>
+            <div v-else class="nav-item empty"></div>
+            
+            <router-link 
+              v-if="nextWork" 
+              :to="`/works/${nextWork.id}.html`" 
+              class="nav-item next"
+            >
+              <div class="nav-info">
+                <span class="nav-label">下一篇</span>
+                <span class="nav-title">{{ nextWork.title }}</span>
+              </div>
+              <span class="nav-icon">→</span>
+            </router-link>
+          </nav>
         </article>
       </div>
     </div>
     
     <div class="not-found" v-else>
       <p>作品不存在</p>
-      <router-link to="/works" class="back-link">返回作品库</router-link>
+      <router-link to="/library.html" class="back-link">返回书库</router-link>
     </div>
   </div>
 </template>
@@ -69,10 +96,20 @@ const worksStore = useWorksStore()
 
 const work = computed(() => worksStore.getWorkById(route.params.id))
 
+const prevWork = computed(() => {
+  if (!route.params.id) return null
+  return worksStore.getPrevWork(route.params.id)
+})
+
+const nextWork = computed(() => {
+  if (!route.params.id) return null
+  return worksStore.getNextWork(route.params.id)
+})
+
 const breadcrumbItems = computed(() => {
   const category = route.query.category || work.value?.category || '作品'
   return [
-    { name: category, path: '/library' },
+    { name: category, path: '/library.html' },
     { name: work.value?.title || '详情' }
   ]
 })
@@ -221,7 +258,81 @@ const breadcrumbItems = computed(() => {
   text-decoration: none;
 }
 
-@media (max-width: 1024px) {
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xxl) 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--spacing-xxl);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 45%;
+}
+
+.nav-item.empty {
+  background: transparent;
+}
+
+.nav-item.prev {
+  justify-content: flex-start;
+}
+
+.nav-item.next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.nav-item:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(201, 169, 110, 0.3);
+}
+
+.nav-item:hover .nav-label,
+.nav-item:hover .nav-title,
+.nav-item:hover .nav-icon {
+  color: white;
+}
+
+.nav-icon {
+  font-size: 24px;
+  color: var(--color-accent);
+  transition: color 0.3s ease;
+}
+
+.nav-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.nav-label {
+  font-size: 12px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
   .article-header {
     grid-template-columns: 250px 1fr;
   }

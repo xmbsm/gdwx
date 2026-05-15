@@ -144,9 +144,9 @@ const currentPage = ref(1)
 
 const allBooks = computed(() => {
   return [
-    ...classicsStore.classicsList.map(b => ({ ...b, type: 'classics', link: `/classics/${b.id}` })),
-    ...poemsStore.poemsList.map(b => ({ ...b, type: 'poems', link: `/poems/${b.id}` })),
-    ...worksStore.worksList.map(b => ({ ...b, type: 'works', link: `/works/${b.id}` }))
+    ...classicsStore.classicsList.map(b => ({ ...b, type: 'classics', link: `/classics/${b.id}.html` })),
+    ...poemsStore.poemsList.map(b => ({ ...b, type: 'poems', link: `/poems/${b.id}.html` })),
+    ...worksStore.worksList.map(b => ({ ...b, type: 'works', link: `/works/${b.id}.html` }))
   ]
 })
 
@@ -259,8 +259,9 @@ currentMainCategory.value = 'all'
   display: flex;
   gap: var(--spacing-xl);
   padding: var(--spacing-lg) 0;
-  margin-left: calc(var(--sidebar-width) + var(--spacing-xl));
-  border-bottom: 2px solid var(--color-border);
+  margin: 0 auto;
+  max-width: 1400px;
+  padding-left: calc(var(--sidebar-width) + var(--spacing-lg));
 }
 
 .tab-btn {
@@ -296,6 +297,9 @@ currentMainCategory.value = 'all'
 .library-container {
   display: flex;
   min-height: calc(100vh - var(--header-height) - 80px);
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .sidebar {
@@ -303,11 +307,27 @@ currentMainCategory.value = 'all'
   background: white;
   border-right: 1px solid var(--color-border);
   padding: var(--spacing-lg);
-  position: fixed;
-  left: 0;
+  position: sticky;
   top: var(--header-height);
-  bottom: 0;
+  height: calc(100vh - var(--header-height));
   overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
 }
 
 .sidebar-header {
@@ -383,7 +403,6 @@ currentMainCategory.value = 'all'
 
 .content-area {
   flex: 1;
-  margin-left: var(--sidebar-width);
   padding: var(--spacing-xl);
   background: var(--color-bg);
 }
@@ -568,12 +587,13 @@ currentMainCategory.value = 'all'
   }
   
   .content-area {
-    margin-left: 0;
     padding: var(--spacing-md);
   }
   
   .header-tabs {
-    margin-left: var(--spacing-md);
+    margin-left: 0;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
   }
   
   .books-grid {

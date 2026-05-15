@@ -7,7 +7,7 @@
         <div class="section-header">
           <h2 class="section-title">经典诗词</h2>
           <p class="section-desc">唐诗宋词，千年传颂</p>
-          <router-link to="/poems" class="section-more">
+          <router-link to="/poems.html" class="section-more">
             查看全部 <span>→</span>
           </router-link>
         </div>
@@ -26,7 +26,7 @@
         <div class="section-header">
           <h2 class="section-title">名著</h2>
           <p class="section-desc">中国古典小说的巅峰之作</p>
-          <router-link to="/library" class="section-more">
+          <router-link to="/library.html" class="section-more">
             查看全部 <span>→</span>
           </router-link>
         </div>
@@ -48,42 +48,42 @@
           <p class="section-desc">按类别探索古典文学</p>
         </div>
         <div class="categories-grid">
-          <router-link to="/works?category=诸子百家" class="category-card">
+          <router-link to="/library.html?category=诸子百家" class="category-card">
             <div class="category-icon">📜</div>
             <h3 class="category-name">诸子百家</h3>
             <p class="category-count">先秦哲学经典</p>
           </router-link>
-          <router-link to="/works?category=史部" class="category-card">
+          <router-link to="/library.html?category=史部" class="category-card">
             <div class="category-icon">📚</div>
             <h3 class="category-name">史部</h3>
             <p class="category-count">历代史书典籍</p>
           </router-link>
-          <router-link to="/works?category=诗文" class="category-card">
+          <router-link to="/library.html?category=诗文" class="category-card">
             <div class="category-icon">✍️</div>
             <h3 class="category-name">诗文</h3>
             <p class="category-count">诗词文赋佳作</p>
           </router-link>
-          <router-link to="/works?category=笔记" class="category-card">
+          <router-link to="/library.html?category=笔记" class="category-card">
             <div class="category-icon">📝</div>
             <h3 class="category-name">笔记小说</h3>
             <p class="category-count">志人志怪小说</p>
           </router-link>
-          <router-link to="/works?category=词曲" class="category-card">
+          <router-link to="/library.html?category=词曲" class="category-card">
             <div class="category-icon">🎵</div>
             <h3 class="category-name">词曲</h3>
             <p class="category-count">宋词元曲精选</p>
           </router-link>
-          <router-link to="/works?category=戏曲" class="category-card">
+          <router-link to="/library.html?category=戏曲" class="category-card">
             <div class="category-icon">🎭</div>
             <h3 class="category-name">戏曲</h3>
             <p class="category-count">古典戏曲剧本</p>
           </router-link>
-          <router-link to="/authors" class="category-card">
+          <router-link to="/authors.html" class="category-card">
             <div class="category-icon">👤</div>
             <h3 class="category-name">作者</h3>
             <p class="category-count">名家作者介绍</p>
           </router-link>
-          <router-link to="/works?category=短篇佳作" class="category-card">
+          <router-link to="/library.html?category=短篇佳作" class="category-card">
             <div class="category-icon">✨</div>
             <h3 class="category-name">短篇佳作</h3>
             <p class="category-count">三言二拍精选</p>
@@ -100,7 +100,7 @@
             新文艺致力于发现生活中美好的文学艺术，收录诗歌、名著、散文等经典文学作品。
             所有内容均来自公有领域，无版权争议，旨在为文学爱好者、在校学生和文史研究者提供便捷的阅读平台。
           </p>
-          <router-link to="/about" class="about-link">
+          <router-link to="/about.html" class="about-link">
             了解更多 →
           </router-link>
         </div>
@@ -130,7 +130,7 @@ const poemsData = computed(() => poemsStore.poemsList.slice(0, 4))
 }
 
 .section-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
 }

@@ -137,7 +137,7 @@ function getResultLink(result) {
     poems: 'poems',
     works: 'works'
   }
-  return `/${typeMap[result.type]}/${result.id}`
+  return `/${typeMap[result.type]}/${result.id}.html`
 }
 
 onMounted(() => {
