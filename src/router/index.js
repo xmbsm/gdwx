@@ -7,7 +7,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('../views/HomeView.vue'),
-      meta: { title: '首页' }
+      meta: { title: '新文艺' }
     },
     {
       path: '/classics/:id',
@@ -87,7 +87,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('Navigation from:', from.path, 'to:', to.path)
-  document.title = `${to.meta.title || '新文艺'} - 新文艺`
+  if (to.path === '/') {
+    document.title = '新文艺 - 理想生活杂志'
+  } else {
+    document.title = `${to.meta.title || '新文艺'} - 新文艺`
+  }
   next()
 })
 
