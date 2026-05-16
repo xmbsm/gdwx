@@ -86,7 +86,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWorksStore } from '../stores/works.js'
 import Breadcrumb from '../components/common/Breadcrumb.vue'
@@ -112,6 +112,22 @@ const breadcrumbItems = computed(() => {
     { name: category, path: '/library.html' },
     { name: work.value?.title || '详情' }
   ]
+})
+
+const updateTitle = () => {
+  if (work.value) {
+    document.title = `${work.value.title} - 新文艺`
+  } else {
+    document.title = '作品详情 - 新文艺'
+  }
+}
+
+watch(work, () => {
+  updateTitle()
+}, { immediate: true })
+
+onMounted(() => {
+  updateTitle()
 })
 </script>
 

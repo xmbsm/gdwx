@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { usePoemsStore } from '../stores/poems.js'
 import Breadcrumb from '../components/common/Breadcrumb.vue'
@@ -110,6 +110,22 @@ const breadcrumbItems = computed(() => {
     { name: category, path: categoryPath },
     { name: poem.value?.title || '详情' }
   ]
+})
+
+const updateTitle = () => {
+  if (poem.value) {
+    document.title = `${poem.value.title} - 新文艺`
+  } else {
+    document.title = '诗词详情 - 新文艺'
+  }
+}
+
+watch(poem, () => {
+  updateTitle()
+}, { immediate: true })
+
+onMounted(() => {
+  updateTitle()
 })
 </script>
 

@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useClassicsStore } from '../stores/classics.js'
 import { usePoemsStore } from '../stores/poems.js'
@@ -141,6 +141,22 @@ const breadcrumbItems = computed(() => [
   { name: '作者', path: '/authors.html' },
   { name: author.value?.name || '详情' }
 ])
+
+const updateTitle = () => {
+  if (author.value) {
+    document.title = `${author.value.name}人物介绍 - 新文艺`
+  } else {
+    document.title = '作者详情 - 新文艺'
+  }
+}
+
+watch(author, () => {
+  updateTitle()
+}, { immediate: true })
+
+onMounted(() => {
+  updateTitle()
+})
 </script>
 
 <style scoped>
@@ -309,6 +325,7 @@ const breadcrumbItems = computed(() => [
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .not-found {

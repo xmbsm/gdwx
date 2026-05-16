@@ -113,7 +113,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useClassicsStore } from '../stores/classics.js'
 import Breadcrumb from '../components/common/Breadcrumb.vue'
@@ -139,6 +139,22 @@ const breadcrumbItems = computed(() => {
     { name: category, path: '/library.html' },
     { name: classic.value?.title || '详情' }
   ]
+})
+
+const updateTitle = () => {
+  if (classic.value) {
+    document.title = `${classic.value.title} - 新文艺`
+  } else {
+    document.title = '作品详情 - 新文艺'
+  }
+}
+
+watch(classic, () => {
+  updateTitle()
+}, { immediate: true })
+
+onMounted(() => {
+  updateTitle()
 })
 </script>
 
