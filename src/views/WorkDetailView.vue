@@ -86,9 +86,10 @@
 </template>
 
 <script setup>
-import { computed, watch, onMounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useWorksStore } from '../stores/works.js'
+import { updatePageSEO, resetSEO, createArticleSchema } from '../utils/seo.js'
 import Breadcrumb from '../components/common/Breadcrumb.vue'
 
 const route = useRoute()
@@ -114,20 +115,43 @@ const breadcrumbItems = computed(() => {
   ]
 })
 
-const updateTitle = () => {
+const updateWorkSEO = () => {
   if (work.value) {
-    document.title = `${work.value.title} - 新文艺`
+    const { title, author, dynasty, category, subcategory, summary, themes } = work.value;
+    const desc = `${title} - ${author}（${dynasty}）${category || ''}${subcategory ? `，${subcategory}` : ''}。${summary || ''}`;
+    const keywordsArray = [title, author, dynasty, category || '作品', subcategory || '', ...(themes || []), '古典文学', '新文艺'].filter(Boolean);
+    
+    // 生成结构化数据
+    const structuredData = createArticleSchema({
+      title: title,
+      author: author,
+      description: desc,
+      keywords: keywordsArray
+    });
+    
+    updatePageSEO({
+      title: `${title} - 新文艺`,
+      description: desc,
+      keywords: keywordsArray.join(','),
+      author: author,
+      type: 'article',
+      structuredData: structuredData
+    });
   } else {
-    document.title = '作品详情 - 新文艺'
+    resetSEO();
   }
 }
 
 watch(work, () => {
-  updateTitle()
+  updateWorkSEO()
 }, { immediate: true })
 
 onMounted(() => {
-  updateTitle()
+  updateWorkSEO()
+})
+
+onUnmounted(() => {
+  resetSEO();
 })
 </script>
 

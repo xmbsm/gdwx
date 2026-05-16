@@ -52,11 +52,12 @@
 </template>
 
 <script setup>
-import { computed, watch, onMounted } from 'vue'
+import { computed, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useClassicsStore } from '../stores/classics.js'
 import { usePoemsStore } from '../stores/poems.js'
 import { useWorksStore } from '../stores/works.js'
+import { updatePageSEO, resetSEO, createPersonSchema } from '../utils/seo.js'
 import Breadcrumb from '../components/common/Breadcrumb.vue'
 
 const route = useRoute()
@@ -142,20 +143,41 @@ const breadcrumbItems = computed(() => [
   { name: author.value?.name || '详情' }
 ])
 
-const updateTitle = () => {
+const updateAuthorSEO = () => {
   if (author.value) {
-    document.title = `${author.value.name}人物介绍 - 新文艺`
+    const { name, dynasty, authorDesc } = author.value;
+    const personDesc = `${name}（${dynasty}）简介：${authorDesc || '中国古代文学家，生平不详'}`;
+    
+    // 生成结构化数据
+    const structuredData = createPersonSchema({
+      name: name,
+      description: personDesc,
+      nationality: dynasty ? '中国' : ''
+    });
+    
+    updatePageSEO({
+      title: `${name}人物介绍 - 新文艺`,
+      description: personDesc,
+      keywords: `${name},${dynasty},文学家,诗人,古典文学,新文艺`,
+      author: name,
+      type: 'profile',
+      structuredData: structuredData
+    });
   } else {
-    document.title = '作者详情 - 新文艺'
+    resetSEO();
   }
 }
 
 watch(author, () => {
-  updateTitle()
+  updateAuthorSEO()
 }, { immediate: true })
 
 onMounted(() => {
-  updateTitle()
+  updateAuthorSEO()
+})
+
+onUnmounted(() => {
+  resetSEO();
 })
 </script>
 

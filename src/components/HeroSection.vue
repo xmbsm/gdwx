@@ -12,7 +12,7 @@
     
     <div class="hero-container">
       <header class="hero-header">
-        <h1 class="hero-title">识典古籍</h1>
+        <h1 class="hero-title">观古阅典</h1>
       </header>
       
       <div class="hero-search" ref="heroSearch">
@@ -579,7 +579,7 @@ canvas {
 .search-stats {
   font-size: 14px;
   color: var(--color-secondary);
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-xl);
 }
 
 .stat-number {

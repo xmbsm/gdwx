@@ -1,0 +1,16 @@
+# 新文艺 - robots.txt
+# 告诉搜索引擎如何爬取网站
+
+User-agent: *
+Allow: /
+
+# 禁止访问的路径
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# 网站地图
+Sitemap: https://xinwenyi.com/sitemap.xml
+
+# 搜索引擎重新访问间隔
+Crawl-delay: 1
